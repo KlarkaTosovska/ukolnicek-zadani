@@ -4,12 +4,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./Task/style.css" />
+
 
   <script type="module" src="index.js"></script>
 
   <title>Úkolníček</title>
 </head>
+
+<!-- a) repozitář vytvořen pomocí "use this template"
+b) struktura projektu důkladně prozkoumána + otestována funkčnost konzole
+c) API s úkoly vypsána do konzole, vlastnosti (done, due, id, name)
+d) v index.js vytvořena komponenta Task, objekt props jsem destrukturovala a do struktury dle html jsem vložila dané proměnné > jen zatím nevím jistě, jak z "done:true" udělám fajfku
+e) vytvořena funkce renderTask a po chvilce boje se správným pojmenováním funkce zprovozněna
+f) pomocí fetch staženy data z API, která se pomocí renderTask (a komponenty Task) zobrazila na stránce (původní obsah html stránky (divu TODO) byl smazán)
+g) dokumentace nastudována, při zapsání parametru ?done=false API vrátí pouze nehotové úkoly
+h) vytvořila jsem funkci checkboxControl(), která pomocí jednoduché podmínky if kontroluje stav checkboxu a podle toho z API stahuje bud všechna data, nebo pouze data s nehotovými úkoly
+-> tato funkce se zavolá vždy, když addEventListener zaznamená 'click' na checkboxu
+-> funkce se také zavolá hned na začátku, kdy checkbox zakliklý není, a to z toho důvodu, aby se hned po otevření zabrazily všechny úkoly, které chceme v ten moment zovrazit
+i) addEventListener reaguje voláním funkce pokaždé, když se na checkbox klikne > tedy i v případě, že uživatel checkbox odklikne
+
+další nedodělky:
+- zatím jsem neměla komponentu oddělenou do speciální složky 
+      > to jdu napravit (link, export, import)
+- nechci, aby se na konci řádku zobrazovalo true/false, ale fajfka, případně křížek
+      > nejprve jsem zkusila vložit podmínku if přímo do t= části return, ale to nefungovalo dobře
+      > takže jsem podmínku posadila nad return > udělala dvě varianty returnu podle toho, zda je úkol splněn či nikoli ... možná to není ideální řešení, ale nic jiného funkčního mě nenapadlo (říkám si, že kód té jedné komponenty není tak dlouhý, aby to takto bylo nepřehledné) 
+- teď už jen vymyslet a zavzpomínat, jak řešení pushnout zpět na GIT :) 
+- předem díky za jakoukoli zpětnou vazbu -->
+
 
 <body>
   <div class="todo">
@@ -27,31 +51,15 @@
       <button class="btn-add">+</button>
       <input id="new-task" class="new-task" type="text" />
     </div>
+
     <div class="todo__filter">
-      <label><input id="checkbox-undone" type="checkbox">&nbsp;Pouze nesplněné</label>
+      <label id="checkbox-label">
+        <input id="checkbox-undone" type="checkbox">&nbsp;Pouze nesplněné
+      </label>
     </div>
+
     <div class="todo__tasks">
-      <div class="task">
-        <div class="task__body">
-          <div class="task__name">Vyprat ponožky</div>
-          <div class="task__due">za 2 hodiny</div>
-        </div>
-        <div class="task__done">✓</div>
-      </div>
-      <div class="task">
-        <div class="task__body">
-          <div class="task__name">Udělat domácí úkol do JS2</div>
-          <div class="task__due">za 2 dny</div>
-        </div>
-        <div class="task__done"></div>
-      </div>
-      <div class="task">
-        <div class="task__body">
-          <div class="task__name">Jít do posilovny</div>
-          <div class="task__due">dnes večer</div>
-        </div>
-        <div class="task__done">✓</div>
-      </div>
+
     </div>
   </div>
 </body>
